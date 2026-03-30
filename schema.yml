@@ -1,0 +1,3020 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/agents/:
+    get:
+      operationId: agents_list
+      tags:
+      - agents
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+          description: ''
+    post:
+      operationId: agents_create
+      tags:
+      - agents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Agent'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: ''
+  /api/agents/{id}/:
+    get:
+      operationId: agents_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this agent.
+        required: true
+      tags:
+      - agents
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: ''
+    put:
+      operationId: agents_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this agent.
+        required: true
+      tags:
+      - agents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Agent'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: ''
+    patch:
+      operationId: agents_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this agent.
+        required: true
+      tags:
+      - agents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAgent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAgent'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAgent'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: ''
+    delete:
+      operationId: agents_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this agent.
+        required: true
+      tags:
+      - agents
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/auth/resend-verification/:
+    post:
+      operationId: auth_resend_verification_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendVerification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResendVerification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResendVerification'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/auth/signup/:
+    post:
+      operationId: auth_signup_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Signup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/auth/token/:
+    post:
+      operationId: auth_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/auth/token/refresh/:
+    post:
+      operationId: auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/auth/token/verify/:
+    post:
+      operationId: auth_token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+  /api/auth/verify-email/:
+    post:
+      operationId: auth_verify_email_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/blog/:
+    get:
+      operationId: blog_list
+      tags:
+      - blog
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlogPost'
+          description: ''
+    post:
+      operationId: blog_create
+      tags:
+      - blog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+  /api/blog/{slug}/:
+    get:
+      operationId: blog_retrieve
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - blog
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    put:
+      operationId: blog_update
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - blog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BlogPost'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    patch:
+      operationId: blog_partial_update
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - blog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBlogPost'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+    delete:
+      operationId: blog_destroy
+      parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - blog
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/contact/:
+    get:
+      operationId: contact_list
+      tags:
+      - contact
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactMessage'
+          description: ''
+    post:
+      operationId: contact_create
+      tags:
+      - contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactMessage'
+          description: ''
+  /api/contact/{id}/:
+    get:
+      operationId: contact_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact message.
+        required: true
+      tags:
+      - contact
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactMessage'
+          description: ''
+    put:
+      operationId: contact_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact message.
+        required: true
+      tags:
+      - contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactMessage'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactMessage'
+          description: ''
+    patch:
+      operationId: contact_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact message.
+        required: true
+      tags:
+      - contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContactMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedContactMessage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedContactMessage'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactMessage'
+          description: ''
+    delete:
+      operationId: contact_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this contact message.
+        required: true
+      tags:
+      - contact
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/faqs/:
+    get:
+      operationId: faqs_list
+      tags:
+      - faqs
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FAQ'
+          description: ''
+    post:
+      operationId: faqs_create
+      tags:
+      - faqs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+          description: ''
+  /api/faqs/{id}/:
+    get:
+      operationId: faqs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faq.
+        required: true
+      tags:
+      - faqs
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+          description: ''
+    put:
+      operationId: faqs_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faq.
+        required: true
+      tags:
+      - faqs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+          description: ''
+    patch:
+      operationId: faqs_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faq.
+        required: true
+      tags:
+      - faqs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFAQ'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFAQ'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFAQ'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+          description: ''
+    delete:
+      operationId: faqs_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this faq.
+        required: true
+      tags:
+      - faqs
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/meta/amenities/:
+    get:
+      operationId: meta_amenities_list
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Amenity'
+          description: ''
+    post:
+      operationId: meta_amenities_create
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amenity'
+          description: ''
+  /api/meta/amenities/{id}/:
+    get:
+      operationId: meta_amenities_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this amenity.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amenity'
+          description: ''
+    put:
+      operationId: meta_amenities_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this amenity.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amenity'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amenity'
+          description: ''
+    patch:
+      operationId: meta_amenities_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this amenity.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAmenity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAmenity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAmenity'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amenity'
+          description: ''
+    delete:
+      operationId: meta_amenities_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this amenity.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/meta/districts/:
+    get:
+      operationId: meta_districts_list
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/District'
+          description: ''
+    post:
+      operationId: meta_districts_create
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/District'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/District'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/District'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+  /api/meta/districts/{id}/:
+    get:
+      operationId: meta_districts_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this district.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    put:
+      operationId: meta_districts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this district.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/District'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/District'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/District'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    patch:
+      operationId: meta_districts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this district.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    delete:
+      operationId: meta_districts_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this district.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/meta/property-types/:
+    get:
+      operationId: meta_property_types_list
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyType'
+          description: ''
+    post:
+      operationId: meta_property_types_create
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyType'
+          description: ''
+  /api/meta/property-types/{id}/:
+    get:
+      operationId: meta_property_types_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property type.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyType'
+          description: ''
+    put:
+      operationId: meta_property_types_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property type.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyType'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyType'
+          description: ''
+    patch:
+      operationId: meta_property_types_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property type.
+        required: true
+      tags:
+      - meta
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyType'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyType'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyType'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyType'
+          description: ''
+    delete:
+      operationId: meta_property_types_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property type.
+        required: true
+      tags:
+      - meta
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/properties/:
+    get:
+      operationId: properties_list
+      tags:
+      - properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyRead'
+          description: ''
+    post:
+      operationId: properties_create
+      tags:
+      - properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyWrite'
+          description: ''
+  /api/properties/{id}/:
+    get:
+      operationId: properties_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this property.
+        required: true
+      tags:
+      - properties
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyRead'
+          description: ''
+    put:
+      operationId: properties_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this property.
+        required: true
+      tags:
+      - properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyWrite'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyWrite'
+          description: ''
+    patch:
+      operationId: properties_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this property.
+        required: true
+      tags:
+      - properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyWrite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyWrite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyWrite'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyWrite'
+          description: ''
+    delete:
+      operationId: properties_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this property.
+        required: true
+      tags:
+      - properties
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/properties/{id}/inquiries/:
+    post:
+      operationId: properties_inquiries_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this property.
+        required: true
+      tags:
+      - properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyRead'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyRead'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyRead'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyRead'
+          description: ''
+  /api/property-images/:
+    get:
+      operationId: property_images_list
+      tags:
+      - property-images
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyImage'
+          description: ''
+    post:
+      operationId: property_images_create
+      tags:
+      - property-images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyImage'
+          description: ''
+  /api/property-images/{id}/:
+    get:
+      operationId: property_images_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property image.
+        required: true
+      tags:
+      - property-images
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyImage'
+          description: ''
+    put:
+      operationId: property_images_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property image.
+        required: true
+      tags:
+      - property-images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyImage'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyImage'
+          description: ''
+    patch:
+      operationId: property_images_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property image.
+        required: true
+      tags:
+      - property-images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyImage'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyImage'
+          description: ''
+    delete:
+      operationId: property_images_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property image.
+        required: true
+      tags:
+      - property-images
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/property-inquiries/:
+    get:
+      operationId: property_inquiries_list
+      tags:
+      - property-inquiries
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PropertyInquiry'
+          description: ''
+    post:
+      operationId: property_inquiries_create
+      tags:
+      - property-inquiries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInquiry'
+          description: ''
+  /api/property-inquiries/{id}/:
+    get:
+      operationId: property_inquiries_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property inquiry.
+        required: true
+      tags:
+      - property-inquiries
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInquiry'
+          description: ''
+    put:
+      operationId: property_inquiries_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property inquiry.
+        required: true
+      tags:
+      - property-inquiries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PropertyInquiry'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInquiry'
+          description: ''
+    patch:
+      operationId: property_inquiries_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property inquiry.
+        required: true
+      tags:
+      - property-inquiries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyInquiry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyInquiry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPropertyInquiry'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInquiry'
+          description: ''
+    delete:
+      operationId: property_inquiries_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this property inquiry.
+        required: true
+      tags:
+      - property-inquiries
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/reviews/:
+    get:
+      operationId: reviews_list
+      tags:
+      - reviews
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+          description: ''
+    post:
+      operationId: reviews_create
+      tags:
+      - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+  /api/reviews/{id}/:
+    get:
+      operationId: reviews_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - reviews
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    put:
+      operationId: reviews_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    patch:
+      operationId: reviews_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReview'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    delete:
+      operationId: reviews_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - reviews
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/services/:
+    get:
+      operationId: services_list
+      tags:
+      - services
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+          description: ''
+    post:
+      operationId: services_create
+      tags:
+      - services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+  /api/services/{id}/:
+    get:
+      operationId: services_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - services
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    put:
+      operationId: services_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    patch:
+      operationId: services_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedService'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+          description: ''
+    delete:
+      operationId: services_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service.
+        required: true
+      tags:
+      - services
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/tools/area-converter/:
+    get:
+      operationId: tools_area_converter_list
+      tags:
+      - tools
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AreaConverter'
+          description: ''
+components:
+  schemas:
+    Agent:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        role:
+          type: string
+          nullable: true
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        photo_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        bio:
+          type: string
+          nullable: true
+        is_active:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - email
+      - id
+      - name
+    Amenity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        icon:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
+    AreaConverter:
+      type: object
+      properties:
+        updated_at:
+          type: string
+          format: date-time
+        units:
+          type: object
+          additionalProperties: {}
+      required:
+      - units
+      - updated_at
+    BlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        slug:
+          type: string
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+        category:
+          type: string
+          nullable: true
+          maxLength: 255
+        excerpt:
+          type: string
+          nullable: true
+        content:
+          type: string
+          nullable: true
+        cover_image_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        is_published:
+          type: boolean
+        published_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - id
+      - title
+    ContactMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        subject:
+          type: string
+          nullable: true
+          maxLength: 255
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - email
+      - id
+      - message
+      - name
+    District:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
+    FAQ:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        question:
+          type: string
+          maxLength: 255
+        answer:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - id
+      - question
+    ListingTypeEnum:
+      enum:
+      - sale
+      - rent
+      type: string
+      description: |-
+        * `sale` - Sale
+        * `rent` - Rent
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - email
+      - password
+    PatchedAgent:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        role:
+          type: string
+          nullable: true
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+        photo_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        bio:
+          type: string
+          nullable: true
+        is_active:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedAmenity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        icon:
+          type: string
+          maxLength: 100
+    PatchedBlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        slug:
+          type: string
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+        category:
+          type: string
+          nullable: true
+          maxLength: 255
+        excerpt:
+          type: string
+          nullable: true
+        content:
+          type: string
+          nullable: true
+        cover_image_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        is_published:
+          type: boolean
+        published_at:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedContactMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        subject:
+          type: string
+          nullable: true
+          maxLength: 255
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDistrict:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+    PatchedFAQ:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        question:
+          type: string
+          maxLength: 255
+        answer:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedPropertyImage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        image_url:
+          type: string
+          nullable: true
+          maxLength: 100
+        alt_text:
+          type: string
+          maxLength: 200
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedPropertyInquiry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 30
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedPropertyType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+    PatchedPropertyWrite:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        property_type:
+          type: string
+        listing_type:
+          $ref: '#/components/schemas/ListingTypeEnum'
+        price_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        price_currency:
+          type: string
+          maxLength: 10
+        price_period:
+          type: string
+          maxLength: 20
+        address:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 100
+        district:
+          type: string
+        bedrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        bathrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        area_aana:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        area_sqft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        road_width_ft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,6}(?:\.\d{0,2})?$
+          nullable: true
+        facing:
+          type: string
+          maxLength: 50
+        year_built:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        is_featured:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        amenities:
+          type: array
+          items:
+            type: string
+        image_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+    PatchedReview:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          nullable: true
+          maxLength: 255
+        rating:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        message:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedService:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        icon:
+          type: string
+          nullable: true
+          maxLength: 255
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PropertyImage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        image_url:
+          type: string
+          nullable: true
+          maxLength: 100
+        alt_text:
+          type: string
+          maxLength: 200
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - id
+      - property
+    PropertyInquiry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        property:
+          type: string
+          format: uuid
+        name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 30
+        message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - email
+      - id
+      - name
+      - property
+    PropertyRead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        property_type:
+          type: string
+          nullable: true
+          readOnly: true
+        listing_type:
+          $ref: '#/components/schemas/ListingTypeEnum'
+        price_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        price_currency:
+          type: string
+          maxLength: 10
+        price_period:
+          type: string
+          maxLength: 20
+        address:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 100
+        district:
+          type: string
+          nullable: true
+          readOnly: true
+        bedrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        bathrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        area_aana:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        area_sqft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        road_width_ft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,6}(?:\.\d{0,2})?$
+          nullable: true
+        facing:
+          type: string
+          maxLength: 50
+        year_built:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        is_featured:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        amenities:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        images:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - address
+      - amenities
+      - created_at
+      - district
+      - id
+      - images
+      - listing_type
+      - price_amount
+      - property_type
+      - title
+      - updated_at
+    PropertyType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
+    PropertyWrite:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        property_type:
+          type: string
+        listing_type:
+          $ref: '#/components/schemas/ListingTypeEnum'
+        price_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,2})?$
+        price_currency:
+          type: string
+          maxLength: 10
+        price_period:
+          type: string
+          maxLength: 20
+        address:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 100
+        district:
+          type: string
+        bedrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        bathrooms:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        area_aana:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        area_sqft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        road_width_ft:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,6}(?:\.\d{0,2})?$
+          nullable: true
+        facing:
+          type: string
+          maxLength: 50
+        year_built:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        is_featured:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        amenities:
+          type: array
+          items:
+            type: string
+        image_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+      required:
+      - address
+      - listing_type
+      - price_amount
+      - title
+    ResendVerification:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          nullable: true
+          maxLength: 255
+        rating:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        message:
+          type: string
+          nullable: true
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - id
+      - name
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        icon:
+          type: string
+          nullable: true
+          maxLength: 255
+        sort_order:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - description
+      - id
+      - title
+    Signup:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - email
+      - full_name
+      - password
+    StatusEnum:
+      enum:
+      - draft
+      - pending
+      - published
+      type: string
+      description: |-
+        * `draft` - Draft
+        * `pending` - Pending Review
+        * `published` - Published
+    TokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - email
+      - password
+      - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+      - token
+    VerifyEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        code:
+          type: string
+      required:
+      - code
+      - email
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
