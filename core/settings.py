@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-tgciw^ak-b2lw*kz&*80lu@mo4=+9b&wg26ldxl^(x*7_-_+!x"
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-tgciw^ak-b2lw*kz&*80lu@mo4=+9b&wg26ldxl^(x*7_-_+!x",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "true").lower() in ("1", "true", "yes", "on")
 
-ALLOWED_HOSTS = []
+def _env_list(name, default):
+    value = os.getenv(name, "").strip()
+    if value:
+        return [item.strip() for item in value.split(",") if item.strip()]
+    return default
+
+
+ALLOWED_HOSTS = _env_list("ALLOWED_HOSTS", ["localhost", "127.0.0.1", ".onrender.com"])
 
 
 # Application definition
@@ -48,6 +61,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -59,12 +73,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
-CORS_ORIGIN_WHITELIST = (
-    "http://localhost:3000",
-    "http://:localhost:8000",
+CORS_ALLOWED_ORIGINS = _env_list(
+    "CORS_ALLOWED_ORIGINS",
+    ["http://localhost:3000"],
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = _env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    ["http://localhost:3000"],
+)
 
 TEMPLATES = [
     {
@@ -87,24 +104,15 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+_db_default = f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", _db_default),
+        conn_max_age=600,
+    )
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mydatabase',       
-#         'USER': 'myuser',           
-#         'PASSWORD': 'password',   
-#         'HOST': 'localhost',
-#         'PORT': '5432',         
-#     }
-# }
-
+DATABASES = ['postgresql://postgres:Jenish@bajra@db.fjhckvnnydacvryugdqj.supabase.co:5432/postgres']
 AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
@@ -142,6 +150,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -149,7 +159,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = os.getenv("CORS_ALLOW_ALL_ORIGINS", "true").lower() in (
+    "1",
+    "true",
+    "yes",
+    "on",
+)
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
