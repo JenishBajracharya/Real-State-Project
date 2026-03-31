@@ -112,7 +112,17 @@ DATABASES = {
     )
 }
 
-DATABASES = ['postgresql://postgres:Jenish@bajra@db.fjhckvnnydacvryugdqj.supabase.co:5432/postgres']
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mydatabase',       
+#         'USER': 'myuser',           
+#         'PASSWORD': 'password',   
+#         'HOST': 'localhost',
+#         'PORT': '5432',         
+#     }
+# }
+
 AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
