@@ -16,7 +16,18 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("full_name",)}),
-        ("Verification", {"fields": ("is_email_verified", "email_verification_code", "email_verification_expires_at")}),
+        (
+            "Verification",
+            {
+                "fields": (
+                    "is_email_verified",
+                    "email_verification_code",
+                    "email_verification_expires_at",
+                    "password_reset_code",
+                    "password_reset_expires_at",
+                )
+            },
+        ),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )

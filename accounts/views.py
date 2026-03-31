@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -47,6 +48,7 @@ def _issue_tokens(user):
 
 
 @csrf_exempt
+@extend_schema(request=SignupSerializer)
 @api_view(["POST"])
 def signup(request):
 
@@ -85,6 +87,7 @@ def signup(request):
 
 
 @csrf_exempt
+@extend_schema(request=LoginSerializer)
 @api_view(["POST"])
 def login_view(request):
 
@@ -110,6 +113,7 @@ def login_view(request):
 
 
 @csrf_exempt
+@extend_schema(request=VerifyEmailSerializer)
 @api_view(["POST"])
 def verify_email(request):
 
@@ -154,6 +158,7 @@ def verify_email(request):
 
 
 @csrf_exempt
+@extend_schema(request=ResendVerificationSerializer)
 @api_view(["POST"])
 def resend_verification(request):
 
@@ -182,6 +187,7 @@ def resend_verification(request):
 
 
 @csrf_exempt
+@extend_schema(request=PasswordResetRequestSerializer)
 @api_view(["POST"])
 def password_reset_request(request):
     serializer = PasswordResetRequestSerializer(data=request.data)
@@ -205,6 +211,7 @@ def password_reset_request(request):
 
 
 @csrf_exempt
+@extend_schema(request=PasswordResetConfirmSerializer)
 @api_view(["POST"])
 def password_reset_confirm(request):
     serializer = PasswordResetConfirmSerializer(data=request.data)
@@ -236,6 +243,7 @@ def password_reset_confirm(request):
     return Response({"detail": "Password updated successfully."})
 
 
+@extend_schema(request=UserProfileSerializer)
 @api_view(["GET", "PUT", "PATCH"])
 def me(request):
     if not request.user.is_authenticated:
