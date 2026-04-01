@@ -209,3 +209,6 @@ class PropertyWriteSerializer(serializers.ModelSerializer):
         for idx, url in enumerate(image_urls):
             if url:
                 PropertyImage.objects.create(property=prop, image_url=url, sort_order=idx)
+
+    def to_representation(self, instance):
+        return PropertyReadSerializer(instance, context=self.context).data
