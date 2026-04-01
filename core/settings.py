@@ -12,11 +12,44 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 
-import dj_database_url
+try:
+    import dj_database_url
+except ModuleNotFoundError:
+    dj_database_url = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def _load_dotenv(dotenv_path: Path) -> None:
+    if not dotenv_path.exists():
+        return
+
+    for raw_line in dotenv_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("'").strip('"')
+        os.environ.setdefault(key, value)
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    return os.getenv(name, str(default)).lower() in ("1", "true", "yes", "on")
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name, str(default)))
+    except ValueError:
+        return default
+
+
+_load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +62,7 @@ SECRET_KEY = os.getenv(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "true").lower() in ("1", "true", "yes", "on")
+DEBUG = _env_bool("DEBUG", True)
 
 def _env_list(name, default):
     value = os.getenv(name, "").strip()
@@ -104,12 +137,45 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+def _database_config(default_url: str):
+    database_url = os.getenv("DATABASE_URL", default_url)
+    conn_max_age = _env_int("DB_CONN_MAX_AGE", 600)
+    ssl_required = _env_bool("DB_SSL_REQUIRE", True)
+
+    if dj_database_url is not None:
+        config = dj_database_url.config(default=database_url, conn_max_age=conn_max_age)
+        if config["ENGINE"] == "django.db.backends.postgresql":
+            config.setdefault("OPTIONS", {})
+            config["OPTIONS"]["sslmode"] = "require" if ssl_required else "prefer"
+        return config
+
+    parsed = urlparse(database_url)
+
+    if parsed.scheme == "sqlite":
+        db_path = parsed.path.lstrip("/") or str(BASE_DIR / "db.sqlite3")
+        return {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": db_path,
+        }
+
+    if parsed.scheme in {"postgres", "postgresql"}:
+        return {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": parsed.path.lstrip("/"),
+            "USER": parsed.username or "",
+            "PASSWORD": parsed.password or "",
+            "HOST": parsed.hostname or "",
+            "PORT": str(parsed.port or ""),
+            "CONN_MAX_AGE": conn_max_age,
+            "OPTIONS": {"sslmode": "require" if ssl_required else "prefer"},
+        }
+
+    raise ValueError(f"Unsupported DATABASE_URL scheme: {parsed.scheme!r}")
+
+
 _db_default = f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL", _db_default),
-        conn_max_age=600,
-    )
+    "default": _database_config(_db_default)
 }
 
 # DATABASES = {
@@ -169,12 +235,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-CORS_ALLOW_ALL_ORIGINS = os.getenv("CORS_ALLOW_ALL_ORIGINS", "true").lower() in (
-    "1",
-    "true",
-    "yes",
-    "on",
-)
+CORS_ALLOW_ALL_ORIGINS = _env_bool("CORS_ALLOW_ALL_ORIGINS", True)
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",

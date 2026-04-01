@@ -1,0 +1,361 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "4vvgnks6tx6da7ym3be03m1h86flk32s",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx2pYdSnrOYO0vOIASKU4qxN0hUgpo38y8lym4rbVsTZcyijkbZ06_GyE_dNqB3HG6zZbnaV1GsrtiD9rsdRZ9Xg7376Biq986ZGECr5kGcEQQJStlQNau9wieUj9k5kBeMIk4FyEDK0iXXAwazPsDCDM4gA:1w4Cjg:NkyUK1GJV8U5I39PmdQHWf-tcsnUZ_1scRfBIJtSixk",
+    "expire_date": "2026-04-05T06:56:32.253Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9v6cugrj4psago6la3bi9v03yv6f3u5g",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHRAsGEPK9DmDtewucT6yJX-qKHePLblIimlm3pu36nBd-m6dZerurM7KinXVBdKhJKdDYtI5YdZswUNJHiF4dfrVCtJTht3lBw630dA4LNO9mB0xxzqb68jyuhzs30GPc7_Z0sZKLToASwxSW2rIRxa0snUZbEyJUs0QsW5p2LFPki37JpOLQX2-vBdAqw:1w763S:G0I9i1gqokZsKhSFMZwEfy42DEPUS-fcdnhw6l0ZRmI",
+    "expire_date": "2026-04-13T06:24:54.852Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a1uqc0fdb8mdcpgsawqt8kqsbvku4zdm",
+  "fields": {
+    "session_data": ".eJxVjrkOwyAQRP-FOiCWY4GU6fMNFrtAnEO25KOK8u-xJRdJPe_NzFt0eV36bp3r1N2LOIvkUw2mBdmAjHS2OBmtZ5kbulAZKEcSp1-NMj_rsLvlkYfbqHgclulOakfUkc7qOpb6uhzsX0Gf536zK7ImdEaDsZFjSuw0RwMNLaWKFtE2v81DgO2R195x8AQJdNTQQhKfL-SsP6g:1w5eVV:f342YHp7aJzu6o6QJEoMBhHcoAGxtH6A_yWLLfQYv7Q",
+    "expire_date": "2026-04-09T06:47:53.352Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jnav7y158prz2vqb33737qpu4ysuct88",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx2pYdSnrOYO0vOIASKU4qxN0hUgpo38y8lym4rbVsTZcyijkbZ06_GyE_dNqB3HG6zZbnaV1GsrtiD9rsdRZ9Xg7376Biq986ZGECr5kGcEQQJStlQNau9wieUj9k5kBeMIk4FyEDK0iXXAwazPsDCDM4gA:1w4ZEj:DkpbUknlNNR4XwG8A9Nw9WinNTGJJ92SRATe0e4WyRA",
+    "expire_date": "2026-04-06T06:58:05.269Z"
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "0e01f14c-4b81-48dc-98a9-d0232b83a243",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$cq1TPgXTekGXAtAyTrCaiu$Hjvo2yAVE72hI2KMdhGgMDRBfT8EZ45PyIJnOeXQP8Y=",
+    "last_login": "2026-03-30T06:24:54.701Z",
+    "is_superuser": false,
+    "email": "tenz@gmail.com",
+    "full_name": "Tenzin Lama",
+    "phone": "9817171777",
+    "avatar_url": "https://airbrush.com/image-enhancer",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-30T06:09:30.820Z",
+    "is_email_verified": true,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "306be87f-aa77-4e18-8444-7063a8de995e",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$hBwF8p3y5ESmXnzwG0PN6e$HSwU7ncmvD97UoAcCaLPt92l6p+d83GmIivIm2qfe1s=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "kriti@gmail.com",
+    "full_name": "Kriti Shrestha",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-22T06:56:59.491Z",
+    "is_email_verified": false,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "37027bc7-58e7-453d-9704-fb30f90565de",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$ENM6Wxd5DovrN9TxcV8yHM$jTXBBlhCYMEUiAjqao7t3f394Hwed14PmBk90zkC5kI=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "test@example.com",
+    "full_name": "Test User",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-30T08:59:41.307Z",
+    "is_email_verified": false,
+    "email_verification_code": "397677",
+    "email_verification_expires_at": "2026-03-30T09:09:44.717Z",
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "4b610610-bd39-4f46-9082-b38712a6edc6",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$zwe0yNKlDg0evNvgkWAjV8$E8ytEgMO+JRIpvNHr29abWEj57K7uJMhNaZayEX1XZ8=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "sagar@gmail.com",
+    "full_name": "Sagar Magar",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-23T06:52:54.406Z",
+    "is_email_verified": false,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "4c4a238e-9b5e-4534-ab1a-805a4f28cf64",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$qDgBFtvIbFKcI4xFAnzuxa$1fRcd/oGJUDGgzFaeTcI73/Cmtr7q3MzO2vTWj/cr3o=",
+    "last_login": "2026-03-26T06:28:02.709Z",
+    "is_superuser": false,
+    "email": "sanchit@gmail.com",
+    "full_name": "Sanchit Kumal",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-26T06:26:34.553Z",
+    "is_email_verified": true,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "6335b60c-3168-44b3-b6cf-7b94a7ebecfe",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$Sw4udXABAK7mC6YkwWbVte$Vij3jwqVE29VHCsHGCN/Mw4Zf86xPwsPcgnmbF+hDg4=",
+    "last_login": null,
+    "is_superuser": false,
+    "email": "jenish@gmail.com",
+    "full_name": "jenish bajracharya",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-26T06:07:56.709Z",
+    "is_email_verified": false,
+    "email_verification_code": "164055",
+    "email_verification_expires_at": "2026-03-26T06:17:59.010Z",
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "959e72f7-f1b2-43d4-835c-af647ec1ba8b",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$g9CYZF3r7WlgO1aM24RyNB$QfdcPVeTUEJQELqfFYY0gNyDr7XZ/50Nl0nGueg1LFQ=",
+    "last_login": "2026-03-30T06:09:58.966Z",
+    "is_superuser": true,
+    "email": "ram@gmail.com",
+    "full_name": "ram ram",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-26T06:17:53.327Z",
+    "is_email_verified": false,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "add97e99-9569-48ef-8a54-6348ad57af17",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$nKKuCcYwzQhuMrrWez3Vac$Bkt9zLGiQmSnNlUAIJy1rTYt0wQ2YFADxbIE74z4m5o=",
+    "last_login": "2026-03-26T06:21:24.989Z",
+    "is_superuser": false,
+    "email": "mali@gmail.com",
+    "full_name": "Malha Mali",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-26T05:58:12.474Z",
+    "is_email_verified": true,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": "fc485b38-09eb-4675-97df-3c6767ca526f",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$pC8cQJBfQWQkNZCfVzQaqD$xV6Vd/RYoI8OWwMfEqTqeVJis2kYrWUzulpCv8nTzYA=",
+    "last_login": "2026-03-23T06:58:05.183Z",
+    "is_superuser": true,
+    "email": "admin@gmail.com",
+    "full_name": "",
+    "phone": "",
+    "avatar_url": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-22T06:55:53.084Z",
+    "is_email_verified": false,
+    "email_verification_code": null,
+    "email_verification_expires_at": null,
+    "password_reset_code": null,
+    "password_reset_expires_at": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "properties.propertytype",
+  "pk": 1,
+  "fields": {
+    "name": "Banglow"
+  }
+},
+{
+  "model": "properties.district",
+  "pk": 1,
+  "fields": {
+    "name": "Kathmandu"
+  }
+},
+{
+  "model": "properties.amenity",
+  "pk": 1,
+  "fields": {
+    "name": "nice one",
+    "icon": ""
+  }
+},
+{
+  "model": "properties.property",
+  "pk": "192fb064-7d13-4ed1-8d17-628ab051d4b9",
+  "fields": {
+    "owner": "add97e99-9569-48ef-8a54-6348ad57af17",
+    "title": "The big House",
+    "description": "The is the big house",
+    "property_type": 1,
+    "listing_type": "sale",
+    "price_amount": "1000000.00",
+    "price_currency": "NPR",
+    "price_period": "100 Days",
+    "address": "Baluwatar",
+    "city": "Kathmandu",
+    "district": 1,
+    "latitude": null,
+    "longitude": null,
+    "bedrooms": 9,
+    "bathrooms": 4,
+    "area_aana": "6.00",
+    "area_sqft": "900.00",
+    "road_width_ft": "15.00",
+    "facing": "East",
+    "year_built": 1980,
+    "is_featured": true,
+    "status": "draft",
+    "created_at": "2026-03-26T06:50:15.395Z",
+    "updated_at": "2026-03-26T06:50:15.395Z",
+    "amenities": [
+      1
+    ]
+  }
+},
+{
+  "model": "properties.propertyimage",
+  "pk": 1,
+  "fields": {
+    "property": "192fb064-7d13-4ed1-8d17-628ab051d4b9",
+    "image_url": "https://www.indiamart.com/proddetail/banglow-6537573212.html",
+    "image_file": "",
+    "alt_text": "",
+    "sort_order": 0
+  }
+},
+{
+  "model": "content.agent",
+  "pk": 1,
+  "fields": {
+    "name": "Hari Dahal",
+    "role": "Senior Agent",
+    "email": "hari@gmail.com",
+    "phone": 9813989898,
+    "photo_url": "https://www.vecteezy.com/free-photos/man",
+    "bio": "I am senior Agent",
+    "is_active": true,
+    "sort_order": 123456
+  }
+},
+{
+  "model": "content.agent",
+  "pk": 2,
+  "fields": {
+    "name": "Shyam Lekhanath",
+    "role": "House Rent",
+    "email": "shyam@gmail.com",
+    "phone": 981818188,
+    "photo_url": "https://airbrush.com/image-enhancer",
+    "bio": "I am Pro at house rent.",
+    "is_active": true,
+    "sort_order": 987854
+  }
+},
+{
+  "model": "content.blogpost",
+  "pk": 1,
+  "fields": {
+    "title": "New House At Baluwatar",
+    "slug": "86B1bnJBRQn-jgiYWek",
+    "category": "Banglow",
+    "excerpt": "string",
+    "content": "string",
+    "cover_image_url": "https://airbrush.com/image-enhancer",
+    "published_at": "2026-03-30T06:29:39.919Z",
+    "read_time_minutes": null,
+    "is_published": true
+  }
+},
+{
+  "model": "content.contactmessage",
+  "pk": 1,
+  "fields": {
+    "name": "Ram CHandra Poudel",
+    "email": "ramchandra@gmail.com",
+    "subject": "For the new House Buy",
+    "message": "Please inform me about the latest update",
+    "created_at": "2026-03-30T06:32:19.000Z"
+  }
+}
+]

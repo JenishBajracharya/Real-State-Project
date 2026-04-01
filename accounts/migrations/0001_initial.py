@@ -2,6 +2,7 @@
 
 import django.contrib.auth.models
 import django.utils.timezone
+import uuid
 from django.db import migrations, models
 
 
@@ -19,11 +20,11 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "id",
-                    models.AutoField(
-                        auto_created=True,
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
                     ),
                 ),
                 ("password", models.CharField(max_length=128, verbose_name="password")),
